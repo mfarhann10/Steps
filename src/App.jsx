@@ -12,13 +12,16 @@ const messages = [
 function App() {
   const [step, setStep] = useState(1);
   function handlePrevious() {
-    if (step < 1) {
+    if (step < messages.length - 1) {
       return null;
     }
     setStep(step - 1);
   }
 
   function handleNext() {
+    if (step > messages.length - 1) {
+      return null;
+    }
     setStep(step + 1);
   }
   const activeStep =
