@@ -1,37 +1,41 @@
 import { useEffect, useState } from "react";
-import "../public/css/styles.css";
+
 /* eslint-disable react/prop-types */
+const messages = [
+  "Learn React ⚛️",
+  "Apply for jobs 💼",
+  "Invest your new income 🤑",
+];
 function App() {
-  const [advice, setAdvice] = useState("");
-  const [count, setCount] = useState(0);
-
-  async function getAdvice() {
-    const res = await fetch("https://api.adviceslip.com/advice");
-    const data = await res.json();
-    setAdvice(data.slip.advice);
-    setCount((c) => c + 1);
-  }
-
-  useEffect(function () {
-    getAdvice();
-  }, []);
+  const step = 1;
+  const activeStep =
+    "w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-lg font-bold text-white";
+  const notActiveStep =
+    "w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-lg font-bold text-gray-700";
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h1 className="font-bold text-2xl">Learn React from scratch</h1>
-      <p className="font-semibold">{advice}</p>
-      <Message count={count} />
-      <button onClick={getAdvice} className="px-4 py-2 rounded-lg bg-cyan-200">
-        Get Advice
-      </button>
+    <div className="steps bg-gray-100 max-w-lg mx-auto mt-24 p-8 rounded-xl shadow-lg space-y-8">
+      {/* Steps */}
+      <div className="numbers flex justify-between">
+        <div className={step >= 1 ? activeStep : notActiveStep}>1</div>
+        <div className={step >= 2 ? activeStep : notActiveStep}>2</div>
+        <div className={step >= 3 ? activeStep : notActiveStep}>3</div>
+      </div>
+
+      {/* Message */}
+      <p className="message text-center text-xl font-semibold text-gray-800 space-y-4">
+        Step {step} : {messages[step - 1]}
+      </p>
+
+      {/* Buttons */}
+      <div className="buttons flex justify-between">
+        <button className="px-6 py-2 rounded-full bg-indigo-500 text-white font-semibold text-sm hover:bg-indigo-600 transition duration-200">
+          Previous
+        </button>
+        <button className="px-6 py-2 rounded-full bg-indigo-500 text-white font-semibold text-sm hover:bg-indigo-600 transition duration-200">
+          Next
+        </button>
+      </div>
     </div>
-  );
-}
-
-function Message(props) {
-  return (
-    <p className="font-semibold">
-      You have read {props.count} pieces of advices
-    </p>
   );
 }
 
