@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Step from "./components/Step";
+import Button from "./components/Button";
+import Message from "./components/Message";
 
 /* eslint-disable react/prop-types */
 const messages = [
@@ -7,7 +10,17 @@ const messages = [
   "Invest your new income 🤑",
 ];
 function App() {
-  const step = 1;
+  const [step, setStep] = useState(1);
+  function handlePrevious() {
+    if (step < 1) {
+      return null;
+    }
+    setStep(step - 1);
+  }
+
+  function handleNext() {
+    setStep(step + 1);
+  }
   const activeStep =
     "w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-lg font-bold text-white";
   const notActiveStep =
@@ -15,26 +28,13 @@ function App() {
   return (
     <div className="steps bg-gray-100 max-w-lg mx-auto mt-24 p-8 rounded-xl shadow-lg space-y-8">
       {/* Steps */}
-      <div className="numbers flex justify-between">
-        <div className={step >= 1 ? activeStep : notActiveStep}>1</div>
-        <div className={step >= 2 ? activeStep : notActiveStep}>2</div>
-        <div className={step >= 3 ? activeStep : notActiveStep}>3</div>
-      </div>
+      <Step step={step} activeStep={activeStep} notActiveStep={notActiveStep} />
 
       {/* Message */}
-      <p className="message text-center text-xl font-semibold text-gray-800 space-y-4">
-        Step {step} : {messages[step - 1]}
-      </p>
+      <Message step={step} message={messages} />
 
       {/* Buttons */}
-      <div className="buttons flex justify-between">
-        <button className="px-6 py-2 rounded-full bg-indigo-500 text-white font-semibold text-sm hover:bg-indigo-600 transition duration-200">
-          Previous
-        </button>
-        <button className="px-6 py-2 rounded-full bg-indigo-500 text-white font-semibold text-sm hover:bg-indigo-600 transition duration-200">
-          Next
-        </button>
-      </div>
+      <Button onClickPrevious={handlePrevious} onClickNext={handleNext} />
     </div>
   );
 }
