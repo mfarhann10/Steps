@@ -16,14 +16,14 @@ function App() {
     if (step < messages.length - 1) {
       return null;
     }
-    setStep(step - 1);
+    setStep((s) => s - 1);
   }
 
   function handleNext() {
     if (step > messages.length - 1) {
       return null;
     }
-    setStep(step + 1);
+    setStep((s) => s + 1);
   }
   const activeStep =
     "w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-lg font-bold text-white";
