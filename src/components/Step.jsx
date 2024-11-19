@@ -45,8 +45,12 @@ function Step() {
 
           {/* Buttons */}
           <div className="buttons flex justify-between">
-            <Button onClick={handlePrevious} text="Previous" />
-            <Button onClick={handleNext} text="Next" />
+            <Button onClick={handlePrevious}>
+              <span>👈</span>Previous
+            </Button>
+            <Button onClick={handleNext}>
+              Next<span>👉</span>
+            </Button>
           </div>
         </div>
       )}
