@@ -44,7 +44,10 @@ function Step() {
           <Message step={step} message={messages} />
 
           {/* Buttons */}
-          <Button onClickPrevious={handlePrevious} onClickNext={handleNext} />
+          <div className="buttons flex justify-between">
+            <Button onClick={handlePrevious} text="Previous" />
+            <Button onClick={handleNext} text="Next" />
+          </div>
         </div>
       )}
     </div>
