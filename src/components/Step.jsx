@@ -41,14 +41,16 @@ function Step() {
             <div className={step >= 3 ? activeStep : notActiveStep}>3</div>
           </div>
           {/* Message */}
-          <Message step={step} message={messages} />
+          <Message step={step}>{messages[step - 1]}</Message>
 
           {/* Buttons */}
           <div className="buttons flex justify-between">
             <Button onClick={handlePrevious}>
+              {/* Children Props */}
               <span>👈</span>Previous
             </Button>
             <Button onClick={handleNext}>
+              {/* Children Props */}
               Next<span>👉</span>
             </Button>
           </div>
